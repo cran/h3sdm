@@ -1,0 +1,97 @@
+#' @name h3sdm_pa
+#' @title Generate presence/pseudo-absence dataset for a species
+#' @description
+#' Generates a hexagonal grid over the AOI, assigns species presence records to hexagons,
+#' and samples pseudo-absences from hexagons with no records.
+#'
+#' @param species `character` Species name (single string) for which records are requested.
+#' @param aoi_sf `sf` AOI (area of interest) polygon.
+#' @param res `integer` H3 resolution for the hexagonal grid.
+#' @param n_pseudoabs `integer` Number of pseudo-absence hexagons to sample.
+#' @param providers `character` Optional vector of data providers (e.g., "gbif", "inat").
+#' @param remove_duplicates `logical` Remove duplicate records at the same coordinates.
+#' @param date `character` Optional date filter for records.
+#' @param limit `integer` Maximum number of records to download.
+#' @param expand_factor `numeric` Factor to expand AOI before creating hex grid.
+#'
+#' @return `sf` object with columns:
+#'   - `h3_address`: H3 index of the hexagon.
+#'   - `presence`: factor with levels "0" (pseudo-absence) and "1" (presence).
+#'   - `geometry`: MULTIPOLYGON of each hexagon.
+#'
+#' @examples
+#' \dontrun{
+#' data(cr_outline_c, package = "h3sdm")
+#' dataset <- h3sdm_pa("Agalychnis callidryas", cr_outline_c, res = 7, n_pseudoabs = 100)
+#' }
+#' @export
+
+h3sdm_pa <- function(species,
+                     aoi_sf,
+                     res = 6,
+                     n_pseudoabs = 500,
+                     providers = NULL,
+                     remove_duplicates = FALSE,
+                     date = NULL,
+                     limit = 500,
+                     expand_factor = 0.1) {
+
+  # Validar inputs
+  if (!inherits(aoi_sf, "sf")) stop("aoi_sf must be an sf object")
+  if (!is.character(species)) stop("species must be a character vector")
+
+  # 1. Generar hexagonal grid
+  hex_grid <- suppressWarnings(
+    h3sdm_get_grid(aoi_sf, res = res, expand_factor = expand_factor)
+  )
+  hex_grid <- hex_grid[, c("h3_address", "geometry")]
+  hex_grid <- sf::st_cast(hex_grid, "MULTIPOLYGON")
+
+  # 2. Obtener registros
+  sp_sf <- suppressWarnings(
+    h3sdm_get_records(species, aoi_sf,
+                      providers = providers,
+                      remove_duplicates = remove_duplicates,
+                      date = date,
+                      limit = limit)
+  )
+
+  # 3. Si no hay registros, retornar temprano
+  if (nrow(sp_sf) == 0) {
+    warning("No records found for species: ", species)
+    hex_grid$presence <- factor(0, levels = c("0", "1"))
+    return(hex_grid)
+  }
+
+  # 4. Asignar registros a hexágonos
+  sp_sf_clean <- sp_sf %>% dplyr::select(geometry)
+
+  joined <- suppressWarnings(
+    sf::st_join(sp_sf_clean, hex_grid, left = FALSE)
+  )
+
+  rec_count <- joined %>%
+    sf::st_drop_geometry() %>%
+    dplyr::group_by(hex_id = h3_address) %>%
+    dplyr::summarise(n = dplyr::n(), .groups = "drop")
+
+  # 5. Crear columna presence
+  hex_grid$presence <- 0
+  hex_grid$presence[hex_grid$h3_address %in% rec_count$hex_id] <- 1
+
+  # 6. Sample pseudo-absences
+  pos_hex <- hex_grid[hex_grid$presence == 1, ]
+  neg_hex <- hex_grid[hex_grid$presence == 0, ]
+  n_sample <- min(n_pseudoabs, nrow(neg_hex))
+
+  if (n_sample > 0) {
+    neg_hex <- neg_hex[sample(seq_len(nrow(neg_hex)), n_sample), ]
+    neg_hex$presence <- 0
+  }
+
+  # 7. Combinar y retornar
+  dataset_sf <- rbind(pos_hex, neg_hex)
+  dataset_sf$presence <- factor(dataset_sf$presence, levels = c("0", "1"))
+
+  return(dataset_sf)
+}

@@ -1,0 +1,37 @@
+Package: h3sdm
+Type: Package
+Title: Species Distribution Modeling with H3 Grids
+Version: 0.1.0
+Authors@R: 
+    person(given = "Manuel",
+           family = "Spínola",
+           role = c("aut", "cre"),
+           email = "mspinola10@gmail.com")
+Description: Provides tools for species distribution modeling using H3
+  hexagonal grids (Uber Technologies Inc., 2022, <https://h3geo.org>).
+  Facilitates retrieval of species occurrence records, generation of H3 grids,
+  computation of landscape metrics, and preparation of spatial data for modern
+  species distribution models workflows. Designed for biodiversity and landscape ecology research.
+URL: https://github.com/ManuelSpinola/h3sdm
+BugReports: https://github.com/ManuelSpinola/h3sdm/issues
+License: MIT + file LICENSE
+Encoding: UTF-8
+RoxygenNote: 7.3.3
+Depends: R (>= 4.1)
+Config/Needs/website: tidyverse/tidytemplate
+Imports: sf, dplyr, purrr, tibble, rlang, terra, spatialsample,
+        recipes, rsample, tune, workflows, yardstick, ecospat, DALEX,
+        stacks
+Suggests: ggplot2, paisaje, knitr, rmarkdown, here, tidyr, themis,
+        DALEXtra, ingredients, exactextractr, landscapemetrics, h3jsr,
+        tidyterra, spocc, tidymodels, workflowsets, ranger, xgboost,
+        ggbrick, parsnip, tidyverse
+VignetteBuilder: knitr
+LazyData: true
+Language: en-US
+NeedsCompilation: no
+Packaged: 2026-04-08 19:07:44 UTC; manuel_nuevo
+Author: Manuel Spínola [aut, cre]
+Maintainer: Manuel Spínola <mspinola10@gmail.com>
+Repository: CRAN
+Date/Publication: 2026-04-15 13:00:29 UTC
