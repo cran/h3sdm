@@ -1,8 +1,9 @@
-c2777de191807e368c823246fd93ea75 *DESCRIPTION
+037549f0d69411ac89710d65094a1673 *DESCRIPTION
 59ad90753a992b2b232e6152c9006859 *LICENSE
-1ae1f3da7ff0a1b9d443b717c0097f98 *NAMESPACE
-364a4aa15f229158b078df2a654e63ca *NEWS.md
+beed56a110e9357d8a6ab5ea4a7b9bca *NAMESPACE
+3b5a897064729dca28c417b79bfd6c0c *NEWS.md
 9fa7685c44a4e355d0fe164ed3688157 *R/data-doc.R
+263665de429d0c121ee00ff6c03cde2b *R/h3sdm_aoa.R
 08126e620a003da220b223be026ef199 *R/h3sdm_calculate_it_metrics.R
 fca0717a585f43687bf5b5223719f880 *R/h3sdm_classify.R
 e2877ac55d9cd8c8136091c021a6ed9e *R/h3sdm_compare_models.R
@@ -13,12 +14,12 @@ a817aa968ea3d2d8a020e9ac35cac7a3 *R/h3sdm_explain.R
 caf593bf5ac014a87b3ba30feafaeefa *R/h3sdm_extract_num.R
 9fefbbb711e1993fdcff09d44680a225 *R/h3sdm_fit_model.R
 10130f55e0b83653a3e5c98ea2d06410 *R/h3sdm_fit_models.R
-e83079d1e6d06b50e2bd129de8f505b7 *R/h3sdm_get_grid.R
+8e1b581b8e2d4ae705e07fe24a408a31 *R/h3sdm_get_grid.R
 4c7c8cb9e39950a5ed7d802bf47ef597 *R/h3sdm_get_records.R
 aec9929e988a0981cfaf7574bd20b106 *R/h3sdm_get_records_by_hexagon.R
 2ea9509e1d6afb964a7ee5b2e57e118f *R/h3sdm_pa.R
 e888ff91a1cad2586c52005cd26b0908 *R/h3sdm_pa_from_records.R
-0ca4e179284979831fdbc2772b050acf *R/h3sdm_predict.R
+3e8303fe97ca5d91416559caf3293361 *R/h3sdm_predict.R
 3ecacf40f123ca6cb98e03aef0a0d33c *R/h3sdm_predictors.R
 0f96e98b79fb8955e238897d7c455645 *R/h3sdm_recipe.R
 058ba0d4e1ec5a1e3f3d1c0e93b218fe *R/h3sdm_recipe_gam.R
@@ -36,7 +37,7 @@ ecbdd5b617f23608056017bfbf690b55 *R/h3sdm_spatial_cv.R
 5d2942c539f74e45136c35b1ff79d290 *data/records.rda
 7a08e96f89e87b90e410eee118819249 *inst/doc/h3sdm.R
 e29aa67726d6369eb05ec9fe726ba059 *inst/doc/h3sdm.Rmd
-57b528fb5163d3133004eed7cbb49a44 *inst/doc/h3sdm.html
+7525e2439254d1863214ef79f121a9b1 *inst/doc/h3sdm.html
 3ff5a7dd1629f8c16dfa183342dabe2f *inst/extdata/bioclim_current.tif
 d1fc164fc91a2a2d9e4771b6b0c21c00 *inst/extdata/bioclim_future.tif
 4e81e5ef222e4c3ff39d4f40f7ed2301 *man/bioclim_current.Rd
@@ -44,6 +45,7 @@ d1fc164fc91a2a2d9e4771b6b0c21c00 *inst/extdata/bioclim_future.tif
 ea2cc90d7477b79f0977f36c07b2674a *man/cr_outline_c.Rd
 32cb276b6dcaf4f2afe9e06868a42cfa *man/figures/README-pressure-1.png
 cb6cff4cb6aaa38924137fb4692143f4 *man/figures/h3sdm_logo_a.png
+018607356c5d4a674fd47b5240448279 *man/h3sdm_aoa.Rd
 665babe427353d0dd7c3a2b04331800b *man/h3sdm_calculate_it_metrics.Rd
 33f7b7b7706919b6b81d3d7f780e3711 *man/h3sdm_classify.Rd
 6171ff9d39e57bcf7d0410e1e2c234c7 *man/h3sdm_compare_models.Rd
@@ -60,7 +62,7 @@ e1a2a4aa140f4d5c9adb0a6a9971efb7 *man/h3sdm_extract_cat.Rd
 15e3bdc5856cf8c4c7b581d28c293f5d *man/h3sdm_get_records_by_hexagon.Rd
 a5375434cf2903e2f12d25a4d1e24d22 *man/h3sdm_pa.Rd
 d1eb4869f74f0100d9d095b76f028464 *man/h3sdm_pa_from_records.Rd
-191a79062aae91e10abb0dd72a27dfdd *man/h3sdm_predict.Rd
+5bdeefdb1a9d8250ef0aa09312d57674 *man/h3sdm_predict.Rd
 1643e14805bcaa821a5011ba2e963bb3 *man/h3sdm_predictors.Rd
 b0086df0c1bcc0e7eb194b67deefb495 *man/h3sdm_recipe.Rd
 3acd31196a1beaa712f5bd9581a28f6e *man/h3sdm_recipe_gam.Rd

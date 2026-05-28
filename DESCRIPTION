@@ -1,7 +1,7 @@
 Package: h3sdm
 Type: Package
 Title: Species Distribution Modeling with H3 Grids
-Version: 0.1.2
+Version: 0.1.3
 Authors@R: 
     person(given = "Manuel",
            family = "Spínola",
@@ -18,20 +18,20 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 Depends: R (>= 4.1)
 Config/Needs/website: tidyverse/tidytemplate
-Imports: sf, dplyr, purrr, tibble, rlang, terra, spatialsample,
+Imports: stats, sf, dplyr, purrr, tibble, rlang, terra, spatialsample,
         recipes, rsample, tune, workflows, yardstick, ecospat, DALEX,
         stacks
 Suggests: ggplot2, paisaje, knitr, rmarkdown, here, tidyr, themis,
         DALEXtra, ingredients, exactextractr, landscapemetrics, h3jsr,
         tidyterra, spocc, tidymodels, workflowsets, ranger, xgboost,
-        ggbrick, parsnip, tidyverse, rbiodatacr
+        ggbrick, parsnip, tidyverse, rbiodatacr, vip
 VignetteBuilder: knitr
 LazyData: true
 Language: en-US
 Config/roxygen2/version: 8.0.0
 NeedsCompilation: no
-Packaged: 2026-05-22 19:41:34 UTC; manuel_nuevo
+Packaged: 2026-05-28 23:01:11 UTC; manuel_nuevo
 Author: Manuel Spínola [aut, cre]
 Maintainer: Manuel Spínola <mspinola10@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-05-22 20:00:03 UTC
+Date/Publication: 2026-05-28 23:20:02 UTC
