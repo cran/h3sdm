@@ -1,7 +1,7 @@
 Package: h3sdm
 Type: Package
 Title: Species Distribution Modeling with H3 Grids
-Version: 0.1.3
+Version: 0.1.4
 Authors@R: 
     person(given = "Manuel",
            family = "Spínola",
@@ -30,8 +30,8 @@ LazyData: true
 Language: en-US
 Config/roxygen2/version: 8.0.0
 NeedsCompilation: no
-Packaged: 2026-05-28 23:01:11 UTC; manuel_nuevo
+Packaged: 2026-05-29 12:36:37 UTC; manuel_nuevo
 Author: Manuel Spínola [aut, cre]
 Maintainer: Manuel Spínola <mspinola10@gmail.com>
 Repository: CRAN
-Date/Publication: 2026-05-28 23:20:02 UTC
+Date/Publication: 2026-05-29 20:50:02 UTC
