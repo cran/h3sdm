@@ -13,7 +13,9 @@ h3sdm_pa_from_records(
   lon_col = "lon",
   lat_col = "lat",
   species_col = NULL,
-  geospatial_filter = TRUE
+  predictors_sf = NULL,
+  geospatial_filter = TRUE,
+  buffer_k = 1L
 )
 }
 \arguments{
@@ -36,9 +38,22 @@ is already an \code{sf} object.}
 \item{species_col}{\code{character} Optional. Name of the column containing the species
 name. If provided, the column is retained in the output as metadata.}
 
+\item{predictors_sf}{\code{sf} Optional. Full hexagonal grid with extracted
+environmental variables, returned by \code{h3sdm_predictors()}. If provided,
+pseudo-absences are selected by stratified sampling in environmental space
+using k-means clustering, ensuring coverage of the full range of
+environmental conditions in the AOI. If \code{NULL} (default), pseudo-absences
+are sampled randomly in geographic space.}
+
 \item{geospatial_filter}{\code{logical} If \code{TRUE} (default) and the input contains
 a \code{geospatialKosher} column, records with \code{geospatialKosher == FALSE} are
 removed before processing. Ignored if the column is absent.}
+
+\item{buffer_k}{\code{integer} Number of H3 grid rings to exclude around each
+presence hexagon when building the pseudo-absence candidate pool. Hexagons
+within \code{buffer_k} rings of any presence are removed before sampling,
+preventing pseudo-absences from being placed in areas likely occupied but
+not yet recorded. Default is \code{1}. Set to \code{0} to disable.}
 }
 \value{
 \code{sf} object with columns:

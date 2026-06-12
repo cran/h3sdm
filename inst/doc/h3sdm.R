@@ -25,8 +25,26 @@ bio <- terra::rast(system.file("extdata", "bioclim_current.tif", package = "h3sd
 names(bio) <- gsub(".*bio_", "bio", names(bio))
 
 ## -----------------------------------------------------------------------------
-data(records)
-head(records)
+h7 <- h3sdm_get_grid(cr, res = 7)
+
+## -----------------------------------------------------------------------------
+bio_predictors <- h3sdm_extract_num(bio, h7)
+predictors <- h3sdm_predictors(bio_predictors) |>
+  dplyr::select(h3_address, bio1, bio12, bio15, geometry)
+
+## -----------------------------------------------------------------------------
+ggplot() +
+  theme_minimal() +
+  geom_sf(data = predictors, aes(fill = bio1)) +
+  scale_fill_viridis_c(option = "B")
+
+## -----------------------------------------------------------------------------
+pres <- h3sdm_pres("Silverstoneia flotator", cr, res = 7, limit = 10000)
+
+## -----------------------------------------------------------------------------
+records <- h3sdm_pa(pres, predictors, n_pseudoabs = 300)
+
+## -----------------------------------------------------------------------------
 table(records$presence)
 
 ## -----------------------------------------------------------------------------
@@ -38,18 +56,6 @@ ggplot() +
     values = c("red", "blue"),
     labels = c("Absence", "Presence")
   )
-
-## -----------------------------------------------------------------------------
-h7 <- h3sdm_get_grid(cr, res = 7)
-bio_predictors <- h3sdm_extract_num(bio, h7)
-predictors <- h3sdm_predictors(bio_predictors) |>
-  dplyr::select(h3_address, bio1, bio12, bio15, geometry)
-
-## -----------------------------------------------------------------------------
-ggplot() +
-  theme_minimal() +
-  geom_sf(data = predictors, aes(fill = bio1)) +
-  scale_fill_viridis_c(option = "B")
 
 ## -----------------------------------------------------------------------------
 dat <- h3sdm_data(records, predictors)

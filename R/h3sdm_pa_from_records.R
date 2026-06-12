@@ -17,9 +17,20 @@
 #'   is already an \code{sf} object.
 #' @param species_col \code{character} Optional. Name of the column containing the species
 #'   name. If provided, the column is retained in the output as metadata.
+#' @param predictors_sf \code{sf} Optional. Full hexagonal grid with extracted
+#'   environmental variables, returned by \code{h3sdm_predictors()}. If provided,
+#'   pseudo-absences are selected by stratified sampling in environmental space
+#'   using k-means clustering, ensuring coverage of the full range of
+#'   environmental conditions in the AOI. If \code{NULL} (default), pseudo-absences
+#'   are sampled randomly in geographic space.
 #' @param geospatial_filter \code{logical} If \code{TRUE} (default) and the input contains
 #'   a \code{geospatialKosher} column, records with \code{geospatialKosher == FALSE} are
 #'   removed before processing. Ignored if the column is absent.
+#' @param buffer_k \code{integer} Number of H3 grid rings to exclude around each
+#'   presence hexagon when building the pseudo-absence candidate pool. Hexagons
+#'   within \code{buffer_k} rings of any presence are removed before sampling,
+#'   preventing pseudo-absences from being placed in areas likely occupied but
+#'   not yet recorded. Default is \code{1}. Set to \code{0} to disable.
 #'
 #' @return \code{sf} object with columns:
 #'   \describe{
@@ -58,7 +69,9 @@ h3sdm_pa_from_records <- function(records,
                                   lon_col = "lon",
                                   lat_col = "lat",
                                   species_col = NULL,
-                                  geospatial_filter = TRUE) {
+                                  predictors_sf = NULL,
+                                  geospatial_filter = TRUE,
+                                  buffer_k = 1L) {
 
   # 1. Validate inputs
   if (!inherits(aoi_sf, "sf")) stop("aoi_sf must be an sf object")
@@ -66,6 +79,9 @@ h3sdm_pa_from_records <- function(records,
   if (!inherits(records, c("data.frame", "sf"))) {
     stop("records must be a data.frame or sf object")
   }
+  if (!is.numeric(buffer_k) || length(buffer_k) != 1L || buffer_k < 0)
+    stop("buffer_k must be a non-negative integer.")
+  buffer_k <- as.integer(buffer_k)
 
   # 2. Convert to sf if input is a data.frame
   if (!inherits(records, "sf")) {
@@ -142,12 +158,62 @@ h3sdm_pa_from_records <- function(records,
 
   # 9. Split into presence and absence hexagons
   pos_hex <- hex_grid[hex_grid$presence == 1, ]
-  neg_hex <- hex_grid[hex_grid$presence == 0, ]
+
+  # Expand exclusion zone using H3 disk rings around each presence hexagon
+  pres_ids <- pos_hex$h3_address
+  if (buffer_k > 0L) {
+    disk_ids    <- unique(unlist(h3jsr::get_disk(pres_ids, ring_size = buffer_k)))
+    exclude_ids <- union(pres_ids, disk_ids)
+  } else {
+    exclude_ids <- pres_ids
+  }
+  neg_hex <- hex_grid[!hex_grid$h3_address %in% exclude_ids, ]
 
   # 10. Sample pseudo-absences
   n_sample <- min(n_pseudoabs, nrow(neg_hex))
   if (n_sample > 0) {
-    neg_hex <- neg_hex[sample(seq_len(nrow(neg_hex)), n_sample), ]
+    if (!is.null(predictors_sf)) {
+      # --- Stratified sampling in environmental space via k-means ------------
+      neg_ids <- neg_hex$h3_address
+      neg_env <- predictors_sf[predictors_sf$h3_address %in% neg_ids, ]
+      neg_env <- neg_env[match(neg_ids, neg_env$h3_address), ]
+
+      neg_df  <- sf::st_drop_geometry(neg_env)
+      num_cols <- names(neg_df)[sapply(neg_df, is.numeric)]
+      zero_var <- sapply(neg_df[, num_cols, drop = FALSE],
+                         function(x) is.na(stats::var(x, na.rm = TRUE)) ||
+                           stats::var(x, na.rm = TRUE) == 0)
+      num_cols <- num_cols[!zero_var]
+
+      if (length(num_cols) > 0) {
+        env_mat <- scale(as.matrix(neg_df[, num_cols, drop = FALSE]))
+        env_mat[is.na(env_mat)] <- 0
+
+        set.seed(42L)
+        km <- stats::kmeans(env_mat, centers = n_sample,
+                            nstart = 5, iter.max = 100)
+        centroids <- km$centers
+
+        selected_idx <- vapply(seq_len(n_sample), function(k) {
+          cluster_members <- which(km$cluster == k)
+          if (length(cluster_members) == 1L) return(cluster_members)
+          member_mat <- matrix(env_mat[cluster_members, ],
+                               nrow = length(cluster_members))
+          centroid   <- matrix(centroids[k, ], nrow = 1)
+          dists      <- rowSums((member_mat -
+                                   centroid[rep(1, nrow(member_mat)), ])^2)
+          cluster_members[which.min(dists)]
+        }, integer(1L))
+
+        neg_hex <- neg_hex[selected_idx, ]
+      } else {
+        # Fallback to random sampling if no valid numeric columns
+        neg_hex <- neg_hex[sample(seq_len(nrow(neg_hex)), n_sample), ]
+      }
+    } else {
+      # --- Random sampling in geographic space (default) --------------------
+      neg_hex <- neg_hex[sample(seq_len(nrow(neg_hex)), n_sample), ]
+    }
   }
 
   # 11. Combine and convert presence to factor
