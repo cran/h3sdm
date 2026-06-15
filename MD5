@@ -1,7 +1,7 @@
-07856ca35b23a1263d4b2fc525b83522 *DESCRIPTION
+20c66f49ec5ed2393556eed256194a48 *DESCRIPTION
 59ad90753a992b2b232e6152c9006859 *LICENSE
-ed7cca277b15e573d311880efdc0767e *NAMESPACE
-4eb174d04bfd6b5adfda118f7ecf190d *NEWS.md
+0d7f5624d0bc041f6687e9d1817389ea *NAMESPACE
+30683fa1755094f0eaf22e29335ba53b *NEWS.md
 f980a92746767d17a97d46c05da952b7 *R/data-doc.R
 7baec50b10a3a67474585d71543a36aa *R/h3sdm_aoa.R
 08126e620a003da220b223be026ef199 *R/h3sdm_calculate_it_metrics.R
@@ -13,16 +13,18 @@ a817aa968ea3d2d8a020e9ac35cac7a3 *R/h3sdm_explain.R
 29c8542fc99dd6ddad4911716c0afb4e *R/h3sdm_extract_cat.R
 caf593bf5ac014a87b3ba30feafaeefa *R/h3sdm_extract_num.R
 d95e7fba88be4435d757f24fabf3c02c *R/h3sdm_filter_outliers.R
+d220c77ff1649a3d95def28297694608 *R/h3sdm_filter_range.R
 9fefbbb711e1993fdcff09d44680a225 *R/h3sdm_fit_model.R
 10130f55e0b83653a3e5c98ea2d06410 *R/h3sdm_fit_models.R
 8e1b581b8e2d4ae705e07fe24a408a31 *R/h3sdm_get_grid.R
 4c7c8cb9e39950a5ed7d802bf47ef597 *R/h3sdm_get_records.R
 aec9929e988a0981cfaf7574bd20b106 *R/h3sdm_get_records_by_hexagon.R
-ef9836ad208c7a28b28618a99f65ac60 *R/h3sdm_pa.R
+9f9b0fc2413f8ac334abfdb56205cd2a *R/h3sdm_pa.R
 476c1d34d8c149e6f1efff78caf98219 *R/h3sdm_pa_from_records.R
 3e8303fe97ca5d91416559caf3293361 *R/h3sdm_predict.R
 3ecacf40f123ca6cb98e03aef0a0d33c *R/h3sdm_predictors.R
 46aab3db05e870f8ad2fcbacea1c258b *R/h3sdm_pres.R
+92214d3415260b38f93d2ee5b8d77824 *R/h3sdm_pres_from_sf.R
 0f96e98b79fb8955e238897d7c455645 *R/h3sdm_recipe.R
 058ba0d4e1ec5a1e3f3d1c0e93b218fe *R/h3sdm_recipe_gam.R
 ecbdd5b617f23608056017bfbf690b55 *R/h3sdm_spatial_cv.R
@@ -60,6 +62,7 @@ a2285fbf2c24fc541510be991f6c44b2 *man/h3sdm_eval_metrics.Rd
 e1a2a4aa140f4d5c9adb0a6a9971efb7 *man/h3sdm_extract_cat.Rd
 02d0409b1a71a2146d8527cce684938d *man/h3sdm_extract_num.Rd
 8d8cb1bc9f05eb71260ac180114927f1 *man/h3sdm_filter_outliers.Rd
+b9da43ed7d6ea274491c787037c3c97c *man/h3sdm_filter_range.Rd
 07f4a2355ffefead4b17460d12489dcf *man/h3sdm_fit_model.Rd
 131ba4e002158bc0be13134177a562c2 *man/h3sdm_fit_models.Rd
 32d9873819706b3f0b12075af44717e1 *man/h3sdm_get_grid.Rd
@@ -70,6 +73,7 @@ b934b9365e5bba9083401a1f66b13b95 *man/h3sdm_pa_from_records.Rd
 5bdeefdb1a9d8250ef0aa09312d57674 *man/h3sdm_predict.Rd
 1643e14805bcaa821a5011ba2e963bb3 *man/h3sdm_predictors.Rd
 0c55f0e941bd8ca3c2e47c3b704d4182 *man/h3sdm_pres.Rd
+06f68635ede6140d9a1ad20889c11485 *man/h3sdm_pres_from_sf.Rd
 b0086df0c1bcc0e7eb194b67deefb495 *man/h3sdm_recipe.Rd
 3acd31196a1beaa712f5bd9581a28f6e *man/h3sdm_recipe_gam.Rd
 0f44d8e94f88b8d0607d5938af130607 *man/h3sdm_spatial_cv.Rd
