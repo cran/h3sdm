@@ -1,9 +1,9 @@
-20c66f49ec5ed2393556eed256194a48 *DESCRIPTION
+f122a8ecc3b5c7031d8a0f29db5828e3 *DESCRIPTION
 59ad90753a992b2b232e6152c9006859 *LICENSE
-0d7f5624d0bc041f6687e9d1817389ea *NAMESPACE
-30683fa1755094f0eaf22e29335ba53b *NEWS.md
+c5524040082fc9e6a7db0d0c58044744 *NAMESPACE
+a6a8e34fa71d478e9d51d123d649b8d1 *NEWS.md
 f980a92746767d17a97d46c05da952b7 *R/data-doc.R
-7baec50b10a3a67474585d71543a36aa *R/h3sdm_aoa.R
+253864856079e8577890ad38ec950f57 *R/h3sdm_aoa.R
 08126e620a003da220b223be026ef199 *R/h3sdm_calculate_it_metrics.R
 fca0717a585f43687bf5b5223719f880 *R/h3sdm_classify.R
 e2877ac55d9cd8c8136091c021a6ed9e *R/h3sdm_compare_models.R
@@ -29,9 +29,10 @@ aec9929e988a0981cfaf7574bd20b106 *R/h3sdm_get_records_by_hexagon.R
 058ba0d4e1ec5a1e3f3d1c0e93b218fe *R/h3sdm_recipe_gam.R
 ecbdd5b617f23608056017bfbf690b55 *R/h3sdm_spatial_cv.R
 86a8829f437d57020ccce25c842554df *R/h3sdm_stack_fit.R
-8a1e3223c480ffea0478e9f366228d9d *R/h3sdm_workflow.R
+9a287c51712dcb8ee78ce8edbfbb7671 *R/h3sdm_workflow.R
+e9bf0eef447a5e87238aa707badcb1a9 *R/h3sdm_workflow_checks.R
 9dcb481c889d1fde6ab88896264d74ff *R/h3sdm_workflow_gam.R
-56aae6855f21f5fb157b150f398c0401 *R/h3sdm_workflows.R
+d03fa7e5cc18e6259cf980dd4012ff87 *R/h3sdm_workflows.R
 37f6d469d95cc1189cd192e0d091f6c1 *R/h3sdn_eval_metrics.R
 376d193d21f3e45b03a286ba80d10819 *R/utils.R
 1d0208304808a6f04a768c48aa2bfe75 *README.md
@@ -42,7 +43,7 @@ ecbdd5b617f23608056017bfbf690b55 *R/h3sdm_spatial_cv.R
 5d2942c539f74e45136c35b1ff79d290 *data/records.rda
 66776aa4152c401e02425d2911507af2 *inst/doc/h3sdm.R
 58271a1c45641c48ebde443a4010d363 *inst/doc/h3sdm.Rmd
-ecc362e41414945e4adec1572549321b *inst/doc/h3sdm.html
+d9dd93a5c1251809ec6542aececf4cc8 *inst/doc/h3sdm.html
 3ff5a7dd1629f8c16dfa183342dabe2f *inst/extdata/bioclim_current.tif
 d1fc164fc91a2a2d9e4771b6b0c21c00 *inst/extdata/bioclim_future.tif
 c2577630ae0bbdebf94f66cd4ca4793f *man/bioclim_current.Rd
@@ -51,7 +52,7 @@ b9ed8d860a230e81c3c475fe094faab8 *man/bioclim_future.Rd
 03117876abee96c536984f599383f1c5 *man/cr_outline_c.Rd
 32cb276b6dcaf4f2afe9e06868a42cfa *man/figures/README-pressure-1.png
 cb6cff4cb6aaa38924137fb4692143f4 *man/figures/h3sdm_logo_a.png
-018607356c5d4a674fd47b5240448279 *man/h3sdm_aoa.Rd
+ea7703643368bb9f6a65662ae988e7ac *man/h3sdm_aoa.Rd
 665babe427353d0dd7c3a2b04331800b *man/h3sdm_calculate_it_metrics.Rd
 33f7b7b7706919b6b81d3d7f780e3711 *man/h3sdm_classify.Rd
 6171ff9d39e57bcf7d0410e1e2c234c7 *man/h3sdm_compare_models.Rd
@@ -79,9 +80,9 @@ b0086df0c1bcc0e7eb194b67deefb495 *man/h3sdm_recipe.Rd
 0f44d8e94f88b8d0607d5938af130607 *man/h3sdm_spatial_cv.Rd
 d536eba2cdb81f018cab4a2ce3fd798e *man/h3sdm_stack_fit.Rd
 0ba048c4855da5d4f2bcd8af20dcdf23 *man/h3sdm_utils.Rd
-23d4b91335b2eacc5ff22b7c16abf844 *man/h3sdm_workflow.Rd
+e0406e75cdc8daa6992b3ec2613edd0f *man/h3sdm_workflow.Rd
 dd1258bc9134ca05527b365b2629c998 *man/h3sdm_workflow_gam.Rd
-d47969f872bb389dbd5587f516f971e7 *man/h3sdm_workflows.Rd
+cb9fabd8369cabd370a9cb7924dfddc6 *man/h3sdm_workflows.Rd
 e317b1e6ef3b88aebc9a0cf23ef5eb2b *man/records.Rd
 f92a0893dc7317ceee2bd063e77ae299 *vignettes/articles/multi_model_workflow.Rmd
 58271a1c45641c48ebde443a4010d363 *vignettes/h3sdm.Rmd
